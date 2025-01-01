@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Message with Checkboxes</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 150px;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #message {
+            font-size: 20px;
+        }
+
+        .options {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span id="message">The quick brown fox over the lazy dog </span>
+    </div>
+
+    <div class="options">
+        <label>
+            <select id="fontFamily" onchange="updateFontFamily()">
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Fantasy">Fantasy</option></select>
+       
+        </label>
+        <label>
+            <select id="fontSize" onchange="updateFontSize()">
+                <option value="16px">16px</option>
+                <option value="20px">20px</option>
+                <option value="24px">24px</option>
+                <option value="32px">32px</option> </select>
+
+       
+        </label>
+        
+       
+        <label>
+            <input type="checkbox" id="boldCheckbox" onchange="updateStyle()"> Bold
+        </label>
+        <label>
+            <input type="checkbox" id="italicCheckbox" onchange="updateStyle()"> Italic
+        </label>
+        <label>
+            <input type="checkbox" id="underlineCheckbox" onchange="updateStyle()"> Underline
+        </label>
+    </div>
+
+    <script>
+        function updateStyle() {
+            const message = document.getElementById("message");
+            
+            // الحصول على قيمة كل مربع اختيار
+            const isBold = document.getElementById("boldCheckbox").checked;
+            const isItalic = document.getElementById("italicCheckbox").checked;
+            const isUnderline = document.getElementById("underlineCheckbox").checked;
+            
+            // تعديل ستايل النص بناءً على القيم
+            message.style.fontWeight = isBold ? "bold" : "normal";
+            message.style.fontStyle = isItalic ? "italic" : "normal";
+            message.style.textDecoration = isUnderline ? "underline" : "none";
+        }
+
+        function updateFontFamily() {
+            const message = document.getElementById("message");
+            const fontFamily = document.getElementById("fontFamily").value;
+            message.style.fontFamily = fontFamily;
+        }
+
+        function updateFontSize() {
+            const message = document.getElementById("message");
+            const fontSize = document.getElementById("fontSize").value;
+            message.style.fontSize = fontSize;
+        }
+    </script>
+</body>
+</html>
