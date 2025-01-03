@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width-width, initial-scale=1.0">
+    <title>localStorage vs sessionStorage</title>
+</head>
+<body>
+    <h1>Understanding localStorage and sessionStorage</h1>
+    <p>Open your browser console to see the results.</p>
+
+    <button id="saveLocal">Save to localStorage</button>
+    <button id="getLocal">Get from localStorage</button>
+    <button id="clearLocal">Clear localStorage</button>
+    <br><br>
+    <button id="saveSession">Save to sessionStorage</button>
+    <button id="getSession">Get from sessionStorage</button>
+    <button id="clearSession">Clear sessionStorage</button>
+
+    <script>
+
+
+
+        /*
+        localStorage: Data persists even after the browser is closed and reopened.
+        sessionStorage: Data is cleared when the tab or browser is closed.
+        */
+
+        // localStorage example
+        document.getElementById('saveLocal').addEventListener('click', () => {
+            localStorage.setItem('name', 'John Doe');
+            console.log('Saved "John Doe" to localStorage with key "name".');
+        });
+
+        document.getElementById('getLocal').addEventListener('click', () => {
+            const name = localStorage.getItem('name');
+            if (name) {
+                console.log(`Retrieved from localStorage: ${name}`);
+            } else {
+                console.log('No data found in localStorage for key "name".');
+            }
+        });
+
+        document.getElementById('clearLocal').addEventListener('click', () => {
+            localStorage.removeItem('name');
+            console.log('Cleared "name" from localStorage.');
+        });
+
+        // sessionStorage example
+        document.getElementById('saveSession').addEventListener('click', () => {
+            sessionStorage.setItem('sessionName', 'Jane Doe');
+            console.log('Saved "Jane Doe" to sessionStorage with key "sessionName".');
+        });
+
+        document.getElementById('getSession').addEventListener('click', () => {
+            const sessionName = sessionStorage.getItem('sessionName');
+            if (sessionName) {
+                console.log(`Retrieved from sessionStorage: ${sessionName}`);
+            } else {
+                console.log('No data found in sessionStorage for key "sessionName".');
+            }
+        });
+
+        document.getElementById('clearSession').addEventListener('click', () => {
+            sessionStorage.removeItem('sessionName');
+            console.log('Cleared "sessionName" from sessionStorage.');
+        });
+    </script>
+</body>
+</html>
