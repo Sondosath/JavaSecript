@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Events Example</title>
+</head>
+
+<body>
+    <h2>Form with Events Example</h2>
+
+    <!-- Simple Form -->
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required><br><br>
+
+        <label for="Gender">Gender:</label>
+        <input type="text" id="Gender" name="Gender" required><br><br>
+
+        <label for="Birthday">Birthday:</label>
+        <input type="date" id="Birthday" name="Birthday" required><br><br>
+
+        <label for="img">Upload your image:</label>
+        <input type="file" id="img" name="img" accept="image/*"><br><hr>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="Majer&University">Major & University:</label>
+        <input type="text" id="Majer&University" name="Majer&University" required><br><br>
+
+        <label for="PoragrammingLanguage">Programming Language:</label>
+        <label><input type="checkbox" name="language" value="HTML"> HTML</label>
+        <label><input type="checkbox" name="language" value="CSS"> CSS</label>
+        <label><input type="checkbox" name="language" value="JavaScript"> JavaScript</label><br><hr>
+
+        <label for="SiblingsNumber">Siblings Number:</label>
+        <input type="text" id="SiblingsNumber" name="SiblingsNumber" required><br><br>
+
+        <label for="DescriptionOfSiblings">Description of Siblings:</label>
+        <input type="text" id="DescriptionOfSiblings" name="DescriptionOfSiblings" required><br><br>
+
+        <button type="button" onclick="saveToLocal()" id="submitBtn">Submit</button>
+        <button type="button" onclick="showCard()">Show Card</button>
+    </form>
+
+    <h3>Stored Data</h3>
+    <div id="cardContainer"></div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
