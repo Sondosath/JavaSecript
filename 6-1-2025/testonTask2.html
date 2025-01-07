@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2</title>
+    <style>
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    
+        select:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+    </style>
+    
+</head>
+<body>
+    <select id="countries" name="countries">
+        <option value="Jordan">Jordan</option>
+        <option value="Palestine">Palestine</option>
+        <option value="SUA">SUA</option>
+        <option value="Syria">Syria</option>
+    </select>
+    <div id="imageBox">
+        <img id="selectedImage" src="" alt="Selected Image" style="display: none;">
+    </div>
+
+
+    <script>
+        // Get the dropdown element
+        const dropdown = document.getElementById("countries");
+        const imgBox = document.getElementById("imgBox");
+
+       
+        const imageMap = {
+        Jordan: "https://www.bing.com/images/search?view=detailV2&ccid=TtV3IRNa&id=C60558BB346DF0DA34A186F163E2B770EE67FC8E&thid=OIP.TtV3IRNawpylSLuOUlPNGQHaE8&mediaurl=https%3a%2f%2fi.pinimg.com%2foriginals%2f2a%2f24%2fbf%2f2a24bf48206dcb0e1b046437b15c69c2.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.4ed57721135ac29ca548bb8e5253cd19%3frik%3djvxn7nC34mPxhg%26pid%3dImgRaw%26r%3d0&exph=4080&expw=6120&q=Jordan+flag&simid=607993883454171010&FORM=IRPRST&ck=737348F2667107DF79B7022F08AB4551&selectedIndex=0&itb=0",
+        Palestine: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsJCQcJCQcJCQkJCwkJCQkJCQsJCwsMCwsLDA0QDBEODQ4MEhkSJRodJR0ZHxwpKRYlNzU2GioyPi0pMBk7IRP/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCz/wAARCAC0AQwDASIAAhEBAxEB/8QAHAAAAwEBAQEBAQAAAAAAAAAAAAECBwMFBgQI/8QARBAAAgAEAwMJBAYIBQUAAAAAAAECAwQRBSExQVGUEhdSVWFxkdLTBhMVgRQiNVSh0QckMkKSsfDxIyU0YnJERbLB4f/EABwBAQACAwEBAQAAAAAAAAAAAAACAwEEBwUGCP/EADARAAIBAgMHAwMDBQAAAAAAAAABAgMRBAVSEhUhMUFRcQYioWGx0UKBwRMycpHw/9oADAMBAAIRAxEAPwDMJ9HErxyrtauHau4/E1Z2ep7qvkcp9JLnXatDM6SWv/I0aeItwmfV4zJdpbeH59vweMB1myZsmLkxwtbnsfamczdTTV0fLThKD2ZKzEAAZIgA8wAEMAAABjsAIdgsMAQDCwAgHYLACCw7AATYChAEgOwACEMABAMABAAAAAAAAAAB9AWkSi0eEzrFOJMcuCbC4I4VFDueztR5dTQTJV45d45ev+6HvR7CGidOvKm+HI1sZldHGx96tLv1PmbAe1U0EE68Uq0EzN20gi7zyJkqZKicEyFwxLY1+KPUpVo1FwPgsdltbBStUXDo+hAAMuPNAB2BAAMBgC3DHuCwArAUAAgGAAhWKAAgChNAEgMQAgGJgCAAAAQwAEAAAAAAB9Ei1sJSRVjwmdcgihiRRWbcUFiZsiTUQ8mbDfotZRQ9zLRQTad0TlShVi4TV0zwKqhnU31l9eV00tOyJbD8h9Xk7325NbzzqrDII7zKa0MWrl6Qv/i3oejRxaftqHxOaempU71cJxWnr+3f7njDHFDFA3DFC4Ylk01Zp/MD0D4xpp2YDCwwYBBYYwBAMYAhWKAAkVirAASIqwgCRFkgCENgASIqwgBAAACAAAAAAA+kSLREJaPAZ2GCGhiGkRNiJSKRKKRgviNFISKImzFHCopJFUrTFaNK0MyH9pd+9Hh1NHPpYrRq8GfJjhT5MX5M+kQ4oYYoYoYoVFDErOGJXTXajZo4mVLg+KPDzTIaGPW2vbPv389/PM+TQz6vDvZ7Aa2oilVmKT8PUyJe5jUiXOkL/bMjijhiXY81vsfVr9E9G0mseqGmk01RSWmmrppqdax69OpGorxZzDG4Cvgan9OvG316PwZVYZqvNPSdfVPAyfVHzT0nX1TwMn1Sw0TKgsarzT0nX1TwMn1Q5p6Xr6p4GT6oBlVgNW5pqXr6p4GT6oc01J19U8DJ9UAymwjV+aak6+qeBk+qHNNSdfVPAyfVAMnEzWeaak6+qeBk+qLmlo+vqngZPrAGTCNZ5paPr6p4GV6wc0tH19U8DK9YAyViNa5pKPr6p4GV6wc0lF19U8DK9YAyQRrfNJRde1PAyvWFzSUXXtTwMr1gDJRGt80lF17UcDK9YXNJRde1HAyvWAMlEa1zS0XXtRwMv1hP9EtF15UcDL9YAyYDWOaai68qOCl+sNfoloX/AN8qOCl+sAfFoolFI+fZ2KKGUhDRE2YjLRJSMGxEZQkMwbEUUikSikYLCke/gftNiODuGTFepoL500yKzlJ6uRG9H2aPs1PAzKROE3B3izWxOFo4qm6daN0bNh2J4disj6RRTlHCrKbBEuTNkxP92ZBquzY97P2mKUlXWUM+XU0k6ZJny8lHLex6wxJ5NPamjRMD9raPEPd01f7ulrnaGGK9qaoi3QOJ/Vie5vuew9Wjioz4S4M5pm3pytg71aHuh8rz38n047Ba18tNbhmbp8oGQajAAVxgAAgGAAhFAASIbAAQrjuIAQsx5hmAQA2JgEhDprtAcKVv7gH8/opEopHz7OxxKGhIoibMRlISGjBsRRRSJQ0YNiJaKRI0CZY0Ia2AFDtst33EitgB9PgftZW4d7umruXVUKtDC271FPDp/hxRftQrc33NaGh0lXR10iCpo50E6RHkooHo+jHC8096aMXhhjjjggghjjmRxKGXBLhcUccTeUMMMObZoHsv7OYjh836fWVMyRHHDb6FJiVo4bWX0p5wtrVJab9h6OFrVG9nmj4L1HlmCpweIUtib6av26eeXc+vsADPTOeiAYACAAAATGAAhDEAIVihACsIbEAIlool3AJKh0+YmOFZfMA/n5FIlFI+fZ2OBSKJRRE2oDRSJRSMF8SkNAhmDZQy0QUDJaGiUVnl2tJb23sSW0DyUejheEYljE5yqOX9SBpT6iZdSJPZFFti3JZ92q93A/Y2oqvd1WLKZT0zSigpU+TUTU8/8V/urs17j7+RIp6aVKkU8qXJky1yZcuVCoYIV2JG7RwjnxnwR8dm3qanh70sL7pd+i/P2+x5uDez2G4LAopS99VxQ2m1U5L3jT1hlrNQw9ife3s9gBnqxioq0Uc4r16mIm6lWV2+ohgBIpGJhcAAExiAEhhdCugAuIYACEMQAElEgCZLKZLAEwh026iLh00AP59RSIRaPAZ2KBSKJRRA2ojRSJRRg2IlIYkMwbCKRSIWw/RLkOLOLKH8X3EZTUFdmlj8yw2W0XXxU1GPy/ol1P0YdhmJYrP+j0NPFNjVnHFnDKkwv96bHayX4vYjS8D9laHCFBPmr6ViCz9/HA+RJbWkiB6d7z7tDPpFTW08Hu6epqZMrlOLkSZ0yXC4nZNtQtZndYjitn+v13FT/MKWOpU+Li2zjmb+uJ41ulRi40/PF+fwa1yYujF4MLRdGLwZk3xHFb/aFbxM/wAxXxHFcm6+t+VTOt/5GzvmGhny++IaGaxaLoxeDGlF0X4Myj4hif3+t4md5gWI4p9+reJn+YxvqGh/7Mb5hoZq9nufgwtFufgzKviOKXf6/W8TP8wfEcTt/rq3iZ3mG+oaGN8w0M1W0XRi8GFoujF4Myn4hin3+t4mf5g+I4p9+reJn+Yb6hoY3zDQzVrRdF+DC0W5+DMo+IYp9/reJneYXxHFH/19bpb/AFM/zGd8w0Mb5hoZq/JfRi8GLkxdGLwZkzxHFL/aFd8qqf5iXiOK/f67iZ/mM75hoZnfENDNbtF0YvBjtF0YvBmRPEsWt9oV3Ez/ADC+JYtsxCu4qf5jO+IaWN8Q0M13kxdGLwYuTF0YvBmQPE8Xd/8AMK7ip/mJ+J4x1hX8VUeYks2hpZLe0dLNh5MXRi8GLkRv92LwZj/xPF+sa/iqjzEPE8Yv9o1/FT/MZWaw0szvaOn5Ni5EfQi/hf5EOCZ0I/4X+RjrxPGEvtGv4uo8xDxPGb/aVfxdR5iSzOL/AEk1mcH+k2TkTOhH/CxqCbb9iP8Ahf5GMPFMY6yxDTP9bqPOR8UxrZieIcXUecmsxjpJrMY6TxkWjmi0ajO5wZaGiUUQNqJSGiSl/YiXxKRcMMUTSSHBLcWbyR+mFclZfPe/mU1KqjwR8lnvq7DZWnSo++r26L/J/wALj3sEuXDDZuzi7c0jumrWOW0uE0Zty4s4pmWZYnMqrr4qe0/hfRLojqnkPQlXQFJ5R0TRV9hzTKINEGdNwXyJux3uiBgq4X3EXHfMAd8xk3z/AK3hcyYG2sxXQr6ivtACK28j5jbE3+BNEkJ5HO7LbuQWImgzId7u5dyXtJIkiWyQe3uE9CxFiRLsc3faVFqQ3+JbEvihRNEWvmi2lZk5FiLUfiVikQmWthvM/RMGUikSi4YW32byDdidbE0sNTdWtJRiurGk3ornaGBLW35MmFJaHVbcsls7TXnPscvzv1dWxKdHBe2Hfq/HZfPjkdE9EdLnFMtdhqtHPJLqdE0Wuw5rtL2FTKZF30Gmm32EId8iFiFjomijnuKWWZBog0XfeO+RzuF8jGyLF3X9d47t7jknnnsK79BYWKuF7om+4LsxYxYoTe4V9RXM2FhN3E3f5BcTeRNIkD7CXrqDas7EN6dpNIkkVcTsLbcUT2fMkkZSE89CHfYVdEvsLEWoh6kvLuKIiZai5EN2fZYm3aU0stveR80WovR+VFrVEJ21HyuzJLebbO0ZhndDL42/un2X89vudVbU6J3tf/4ck8lmWnfUokcuzHMsRmE9uu+HRdF/3fmdkxq+djmollY6LaUtWPHkjotMyv8A0QmUrFTKGdFbW5SfeQrDv/craKmjoO9ibicWn4kLELXOtw5S0Oad0PtMWGydLoL+CIWhWzUjYiy8gurNMjldoGLES7/zFft7cybvsFdu/wCAsLFOISZLYaXsyViVimJvJE8oTby3mUgojby3k3V9B33kvesiViSQ20TcG8hXJJEkgbJbuMl6akkTSJbIee5A8yW2XJF6RLi2Mm73Db1/ES+XzRai5I/Es4mdLWaWejADbZv1G3K75nRZOw4c2AFDNZlw/tfM7pa/IAKZGvMqE6JZ/IAKGUSHDnf5l2VgAgyp8xPQewAMGBoa29gAQZFl2B6f1uACJALK4bH2AADFtsD3AAMiSu2D2gBkCshNABIkFtULtADIQtV8ybK67dQAkicQaV32EP8AmAEkSiQ1/Ii2YAXI2ETEl9buCVLhihbd9bZdyAC+mX0z/9k=",
+        KSA: "https://www.bing.com/images/search?view=detailV2&ccid=xneo%2f%2fWT&id=DF46A1B738560B6D5DFD72DBA35D3B279A0C312F&thid=OIP.xneo__WTiQm4lgpwAxxR7QHaE8&mediaurl=https%3a%2f%2fcdn.britannica.com%2f79%2f5779-004-DC479508%2fFlag-Saudi-Arabia.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.c677a8fff5938909b8960a70031c51ed%3frik%3dLzEMmic7XaPbcg%26pid%3dImgRaw%26r%3d0&exph=534&expw=800&q=ksa+flag&simid=608020456447870872&FORM=IRPRST&ck=2CF699F1A394084DFD3E3E01196A17E9&selectedIndex=0&itb=0",
+        Syria : "https://www.bing.com/images/search?view=detailV2&ccid=yRW3%2fKap&id=B35995467650E4C7F93C9487D63F08CFB72D407F&thid=OIP.yRW3_KapEy3SXHRU0OwpNwHaE8&mediaurl=https%3a%2f%2fi.pinimg.com%2foriginals%2f74%2f9a%2ffa%2f749afaab2459d3ca2620b680b1d16e40.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.c915b7fca6a9132dd25c7454d0ec2937%3frik%3df0Att88IP9aHlA%26pid%3dImgRaw%26r%3d0&exph=1707&expw=2560&q=Syriaflag&simid=608018751329276880&FORM=IRPRST&ck=57DD2DC19C4430E410AFEF87117F5998&selectedIndex=9&itb=0"
+    };
+
+
+    imageDropdown.addEventListener("change", function () {
+            const selectedValue = imageDropdown.value;
+
+            if (selectedValue && imageMap[selectedValue]) {
+                // Update the image source and display it
+                selectedImage.src = imageMap[selectedValue];
+                selectedImage.alt = selectedValue;
+                selectedImage.style.display = "block";
+            } else {
+                // Hide the image if no valid option is selected
+                selectedImage.style.display = "none";
+            }
+        });
+
+        dataDropdown.addEventListener("change", function () {
+        const selectedValue = dataDropdown.value;
+        if (selectedValue) {
+            infoBox.textContent = data[selectedValue];
+        } else {
+            infoBox.textContent = "";
+        }
+    });
+
+    </script>
+</body>
+</html>

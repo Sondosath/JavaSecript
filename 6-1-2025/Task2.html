@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown with Images</title>
+    <style>
+        #imageBox {
+            margin-top: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 300px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <select id="imageDropdown">
+        <option value="jordan">Jordan</option>
+        <option value="palestine">Palestine</option>
+        <option value="Syria">Syria</option>
+
+    </select>
+
+    <div id="imageBox">
+        <img id="selectedImage" src="" alt="Selected Image" style="display: none;">
+    </div>
+
+    <script>
+        const imageDropdown = document.getElementById("imageDropdown");
+        const selectedImage = document.getElementById("selectedImage");
+
+        // Map of options to image URLs
+        const imageMap = {
+            jordan: "https://www.worldatlas.com/r/w728/upload/92/e2/ed/jo-flag.jpg",
+            palestine: "https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg",
+            Syria : "https://ak.picdn.net/shutterstock/videos/6738124/thumb/1.jpg"
+        };
+
+        imageDropdown.addEventListener("change", function () {
+            const selectedValue = imageDropdown.value;
+
+            if (imageMap[selectedValue]) {
+                selectedImage.src = imageMap[selectedValue];
+                selectedImage.style.display = "block";
+            } else {
+                selectedImage.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

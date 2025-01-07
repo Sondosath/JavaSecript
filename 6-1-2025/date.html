@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*Date*/
+        const today = new Date();
+
+        console.log(today.getDate());        // Outputs: current day of the month
+        console.log(today.getDay());         // Outputs: current day of the week
+        console.log(today.getFullYear());    // Outputs: current year
+        console.log(today.getHours());       // Outputs: current hour
+        console.log(today.getMilliseconds()); // Outputs: current milliseconds
+        console.log(today.getMonth());       // Outputs: current month (0-11)
+        console.log(today.getSeconds());     // Outputs: current seconds
+        console.log(today.getTime());        // Outputs: milliseconds since epoch
+
+
+
+
+
+        let dateFromString = new Date("October 13,1996 05:35:32");
+        let x = dateFromString.getDate();
+        console.log(x)
+
+
+        console.log(new Date(2023, 8, 10, 23, 15)); // Sun Sep 10 2023 23:15:00
+
+        // Omitted hour, minute, seconds and milliseconds
+        console.log(new Date(2023, 8, 10)); // Sun Sep 10 2023 00:00:00
+
+        // Passed only Year and Month
+        console.log(new Date(2023, 8)); // Fri Sep 01 2023 00:00:00
+
+        // Attention Please!!!
+        console.log(new Date(2023)); // Thu Jan 01 1970 05:30:02
+
+
+        /***********************************/
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+function validateForm(username, email, password) {
+    const usernameRegex = /^[a-zA-Z0-9]{3,15}$/; // 3-15 characters, letters, numbers, underscores
+    const emailRegex = /^[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/; // Standard email format
+    const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/; // 8+ chars, uppercase, lowercase, digit, special char
+
+    if (!usernameRegex.test(username)) {
+        return "Invalid username: Must be 3-15 characters, only letters, numbers, or underscores.";
+    }
+
+    if (!emailRegex.test(email)) {
+        return "Invalid email: Must be in a valid email format (e.g., example@example.com).";
+    }
+
+    if (!passwordRegex.test(password)) {
+        return "Invalid password: Must be at least 8 characters, include an uppercase letter, a lowercase letter, a digit, and a special character.";
+    }
+
+    return "Validation successful!";
+}
+
+// Example usage
+const username = "user_name";
+const email = "user@example.com";
+const password = "Password@123";
+
+const validationMessage = validateForm(username, email, password);
+console.log(validationMessage);
+
+    </script>
+</body>
+</html>

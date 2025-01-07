@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>مثال على appendChild</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>إضافة فقرة جديدة</h2>
+    <div id="myContainer">
+        <p>هذه فقرة موجودة بالفعل.</p>
+    </div>
+    <button id="addParagraphButton">أضف فقرة جديدة</button>
+
+
+    <script>
+        // الحصول على الزر
+        const button = document.getElementById("addParagraphButton");
+
+        // تعيين حدث onclick للزر
+        button.onclick = function() {
+
+          var div11  = document.getElementById('myContainer');
+          div11.innerHTML +=   <p>ssssssssssssss</p>
+
+        };
+
+
+
+
+    </script>
+</body>
+</html>
