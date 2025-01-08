@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form id="myForm">
+        <label for="Fname">Enter a NFame:</label>
+        <input type="text" id="Fname" name="Fname" required>
+        <span id="FnameError" class="error">Numbers are not allowed!</span>
+        <br><br>
+
+        <label for="Lname">Enter a Lame:</label>
+        <input type="text" id="Lname" name="Lname" required>
+        <span id="LnameError" class="error">Numbers are not allowed!</span>
+        <br><br>
+
+        <label for="Bdate">Enter a Bdate:</label>
+        <input type="date" id="Bdate" name="Bdate" required><br><br>
+
+        <label for="email">Enter an email</label>
+        <input type="email" id="email" name="email" ><br><br>
+
+        <label for="Cemail">Confirm email:</label>
+        <input type="email" id="Cemail" name="Cemail" required><br><br>
+
+        <label for="Password">Password:</label>
+        <input type="Password" id="Password" name="Password" required><br><br>
+
+        <label for="cPassword">Confirm Password:</label>
+        <input type="Password" id="cPassword" name="cPassword" required><br><br>
+
+    </form>
+    <script>
+        //elements 
+        let Fname = document.getElementById("Fname");
+        let FnameError = document.getElementById("FnameError");
+        let Lname = document.getElementById("Lname");
+        let LnameError = document.getElementById("LnameError");
+        let Bdate = document.getElementById("Bdate");
+        let email = document.getElementById("email");
+        let cemail = document.getElementById("cemail");
+        let Password = document.getElementById("Password");
+        let cPassword = document.getElementById("cPassword");
+
+
+
+        
+
+        let onlyLettersRegx = /^[a-zA-Z\s]$/;
+        if (!onlyLettersRegx.test(Fname)) {
+        console.log("Numbers not allowed");}
+
+        let PassRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    </script>
+</body>
+</html>

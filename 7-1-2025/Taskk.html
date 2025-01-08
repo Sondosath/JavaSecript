@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+            margin-left: 10px;
+        }
+        .input-error {
+            border-color: red;
+        }
+        .input-success {
+            border-color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="myForm">
+        <label for="Fname">Enter a First Name:</label>
+        <input type="text" id="Fname" name="Fname" required>
+        <span id="FnameError" class="error">Only letters are allowed!</span><br><br>
+
+        <label for="Lname">Enter a Last Name:</label>
+        <input type="text" id="Lname" name="Lname" required>
+        <span id="LnameError" class="error">Only letters are allowed!</span><br><br>
+
+        <label for="Bdate">Enter a Birth Date:</label>
+        <input type="text" id="Bdate" name="Bdate" required>
+        <span id="BdateError" class="error">Please enter a valid date!</span><br><br>
+
+        <label for="email">Enter an Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error">Please enter a valid email!</span><br><br>
+
+        <label for="Cemail">Confirm Email:</label>
+        <input type="email" id="Cemail" name="Cemail" required>
+        <span id="CemailError" class="error">Emails do not match!</span><br><br>
+
+        <label for="Password">Password:</label>
+        <input type="Password" id="Password" name="Password" required>
+        <span id="PasswordError" class="error">Password must contain 8+ characters, uppercase, lowercase, and a number!</span><br><br>
+
+        <label for="cPassword">Confirm Password:</label>
+        <input type="Password" id="cPassword" name="cPassword" required>
+        <span id="cPasswordError" class="error">Passwords do not match!</span><br><br>
+    </form>
+
+    <script>
+        const Fname = document.getElementById("Fname");
+        const Lname = document.getElementById("Lname");
+        const Bdate = document.getElementById("Bdate");
+        const email = document.getElementById("email");
+        const Cemail = document.getElementById("Cemail");
+        const Password = document.getElementById("Password");
+        const cPassword = document.getElementById("cPassword");
+
+        // Regular expressions
+        const onlyLettersRegex = /^[a-zA-Z\s]+$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        const dateRegex = /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+
+
+        // Validation function
+        function validateField(input, regex, errorElement) {
+            if (!regex.test(input.value)) {
+                errorElement.style.display = "inline";
+                input.classList.add("input-error");
+                input.classList.remove("input-success");
+            } else {
+                errorElement.style.display = "none";
+                input.classList.add("input-success");
+                input.classList.remove("input-error");
+            }
+        }
+
+        // Add event listeners for validation
+        Fname.addEventListener("input", () => {
+            const FnameError = document.getElementById("FnameError");
+            validateField(Fname, onlyLettersRegex, FnameError);
+        });
+
+        Lname.addEventListener("input", () => {
+            const LnameError = document.getElementById("LnameError");
+            validateField(Lname, onlyLettersRegex, LnameError);
+        });
+
+        Bdate.addEventListener("input", () => {
+            const BdateError = document.getElementById("BdateError");
+            validateField(Bdate, dateRegex, BdateError);
+        });
+
+        email.addEventListener("input", () => {
+            const emailError = document.getElementById("emailError");
+            validateField(email, emailRegex, emailError);
+        });
+
+        Cemail.addEventListener("input", () => {
+            const CemailError = document.getElementById("CemailError");
+            if (Cemail.value !== email.value || !emailRegex.test(Cemail.value)) {
+                CemailError.style.display = "inline";
+                Cemail.classList.add("input-error");
+                Cemail.classList.remove("input-success");
+            } else {
+                CemailError.style.display = "none";
+                Cemail.classList.add("input-success");
+                Cemail.classList.remove("input-error");
+            }
+        });
+
+        Password.addEventListener("input", () => {
+            const PasswordError = document.getElementById("PasswordError");
+            validateField(Password, passwordRegex, PasswordError);
+        });
+
+        cPassword.addEventListener("input", () => {
+            const cPasswordError = document.getElementById("cPasswordError");
+            if (cPassword.value !== Password.value) {
+                cPasswordError.style.display = "inline";
+                cPassword.classList.add("input-error");
+                cPassword.classList.remove("input-success");
+            } else {
+                cPasswordError.style.display = "none";
+                cPassword.classList.add("input-success");
+                cPassword.classList.remove("input-error");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+    "products": [
+        { "name": "Laptop", "price": 999 },
+        { "name": "Smartphone", "price": 900 },
+        { "name": "Tablet", "price": 500 }
+    ]
+
+   
+}
