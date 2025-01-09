@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <table id="container" style="border: 2px solid black; margin-left:20px ;"></table>
+    <script>
+
+      
+
+        let container = document.getElementById("container"); //
+
+        async function getAllBooks() { //async the function to make the compiler skip it until all data are ready 
+        let APIdata = await fetch ('https://677f67de0476123f76a64435.mockapi.io/books') //fetch THE DATA from the API ,await to reteurn the promis when data are ready to complete the function then return to where the code was 
+        let data = await APIdata.json(); //extract the JSON data 
+
+
+
+    //display firstlly we create a for each loop to loop over the all objects insaid the Array (JSON is Array of objects)
+        data.forEach(element => {
+            container.innerHTML += `<tr  style="border: 2px solid black;">  
+                <td style="border: 2px solid black; margin-left:20px">${element.id}</td>
+                <td style="border: 2px solid black;">${element.name}</td>
+                </tr>`}); //for each itration create a table row then full the Table data into it using backtick and $
+
+                //we get the data using fetch from the api using link 
+                //then we extract only the JSON data from the string that comming from the link
+                //we looped over all object to get the data we want 
+                //in every itrition we send it to HTML file and update it with the new values 
+                //finally we 
+
+
+
+}
+
+// call to function
+getAllBooks();
+    </script>
+</body>
+</html>
