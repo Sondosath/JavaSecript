@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #output{
+            display: flex;
+            
+        }
+        #output > div {
+            width: 20%;
+            padding: 20px;
+            border: solid 5px black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Users Card</h1>
+    <button onclick="PrintAPI()">Load Users</button>
+    <div id="output"></div>
+
+    <script>
+        
+        function displayUser() {
+            const outputDiv = document.getElementById("output"); // Get the output div
+            const JSON_data = new XMLHttpRequest(); // Create XMLHttpRequest object
+            JSON_data.open("GET", "users.json"); // Open the JSON file
+            JSON_data.onload = function () {
+                if (JSON_data.status == 200) { // Check if the request is successful
+                    const data = JSON.parse(JSON_data.responseText); // Parse JSON string
+                    const users = data["users"]; // Access the "users " key in JSON
+
+                    // Clear previous content (optional)
+                    outputDiv.innerHTML = "";
+                    // Loop through users and create cards
+                    for (const user of users) {
+                        const userCard = document.createElement("div");
+                        userCard.innerHTML = `
+                            <h3>${user.Name}</h3>
+                            <p><strong>Age:</strong> ${user.Age}</p>
+                            <p><strong>Email:</strong> ${user.Email}</p>
+                            <p><strong>Profession:</strong> ${user.Proffission}</p>`;
+                        outputDiv.appendChild(userCard);
+                    }
+                }
+            };
+            JSON_data.send(); // Send the request
+        }
+        async function PrintAPI() {
+    try {
+        let response = await fetch("https://api.npoint.io/45ffe306c391926ee9f4"); // Corrected variable name
+        const data = await response.json(); // Parse the JSON response
+
+        // Ensure the API returns the data in the correct structure
+        const users = data["users"]; // Access the "users" key
+
+        // Display the data on the page
+        const outputDiv = document.getElementById('output');
+
+        // Create user cards for each user
+        for (const user of users) {
+            const userCard = document.createElement('div');
+
+            userCard.innerHTML = `
+                <h3>${user.Name}</h3>
+                <p><strong>Age:</strong> ${user.Age}</p>
+                <p><strong>Email:</strong> ${user.Email}</p>
+                <p><strong>Profession:</strong> ${user.Proffission}</p>`;
+
+            outputDiv.appendChild(userCard);
+        }
+    } catch (error) {
+        console.error("Error fetching or processing the API data:", error);
+    }
+}
+
+// Call the function to load and display data
+PrintAPI();
+
+
+        //   function displayUser() {
+        //     // let output = document.getElementById("output")
+        //     const JSON_data = new XMLHttpRequest(); // Create XMLHttpRequest object
+        //     JSON_data.open("GET", "users.json"); // Open the JSON file
+        //     JSON_data.onload = function () {
+        //     if (JSON_data.status == 200) { // Check if the request is successful
+        //         const data = JSON.parse(JSON_data.responseText); // Parse JSON string
+        //         const user = data.user;
+        //         for (const user of data) {
+                
+        //         const userCard = document.createElement('div');
+
+        //         userCard.innerHTML = `
+        //         <h3>${user.name}</h3>
+        //         <p><strong>Age:</strong> ${user.age}</p>
+        //         <p><strong>Email:</strong> ${user.email}</p>
+        //         <p><strong>Proffission:</strong> ${user.Proffission}</p>
+        //         `;
+
+        //         outputDiv.appendChild(userCard);
+        //     }
+
+        //     }
+        //     };
+        //     JSON_data.send(); // Send the request
+        // }
+
+    //       function displayUser() {
+
+    //         fetch("users.json")
+    //             .then((response) => response.json())
+    //             .then((data) => {
+    //             // Display data on the page
+    //             const output = document.getElementById("output");
+    //             const user = data.user;
+    //             output.innerHTML = `
+    //                 <h3>${user.name}</h3>
+    //             <p><strong>Age:</strong> ${user.age}</p>
+    //             <p><strong>Email:</strong> ${user.email}</p>
+    //             <p><strong>Proffission:</strong> ${user.Proffission}</p>
+    //             `;
+    //             })
+
+    // }
+
+    </script>
+    
+</body>
+</html>
